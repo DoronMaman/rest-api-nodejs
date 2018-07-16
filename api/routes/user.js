@@ -2,10 +2,23 @@ const express =require('express');
 const router=express.Router();
 const User=require('../../modal/users');
 const mongoose=require('mongoose');
-router.get('/',(req,res,next)=>{
-    res.status(200).json({
-        message:'get users'
-    });
+// router.get('/',(req,res,next)=>{
+//     res.status(200).json({
+//         message:'get users'
+//     });
+// });
+router.get('/:id',(req,res,next)=>{
+    const id=req.param.userId;
+    User.findById(id)
+    .exec()
+    .then(doc => {
+        console.log(doc);
+        res.status(200).json(doc);
+    })
+  .catch(err=>{
+      console.log(err);
+      res.status(500).json({error:err});
+  });
 });
 router.get('/',(req,res,next)=>{
     const id=req.param.userId;
