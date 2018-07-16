@@ -4,11 +4,7 @@ const userRoutes = require('./api/routes/user');
 const morgan = require('morgan');
 const bodyParser=require('body-parser');
 const mongoose=require('mongoose');
-mongoose.connect('mongodb://dori.d311@gmail.com:Doron171182%40@cluster0-shard-00-00-xheus.mongodb.net:27017,cluster0-shard-00-01-xheus.mongodb.net:27017,cluster0-shard-00-02-xheus.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
-{
-    useMongoClient:true
-}
-);
+mongoose.connect('mongodb://127.0.0.1:27017/mycol',{ useNewUrlParser: true });
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());

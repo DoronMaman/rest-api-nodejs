@@ -7,9 +7,9 @@ router.get('/',(req,res,next)=>{
         message:'get users'
     });
 });
-router.get('/:userId',(req,res,next)=>{
+router.get('/',(req,res,next)=>{
     const id=req.param.userId;
-    User.findById(id)
+    User.find()
     .exec()
     .then(doc => {
         console.log(doc);
