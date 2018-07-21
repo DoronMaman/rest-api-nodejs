@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const userRoutes = require('./api/routes/user');
+const userDetailsRoutes= require('./api/routes/userDetails');
+const userAuth=require('./api/routes/userAuth');
 const morgan = require('morgan');
 const bodyParser=require('body-parser');
 const mongoose=require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/users',{ useNewUrlParser: true });
+mongoose.Promise=global.Promise;
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -21,11 +24,14 @@ app.use((req,res,next)=>{
     next();
 });
 app.use('/user', userRoutes);
+app.use('/userDetails', userDetailsRoutes);
+app.use('/userAuth', userAuth);
 app.use((req, res, next) => {
     const error = new Error('no found');
     error.status = 404;
     next(error);
 });
+
 app.use((error,req, res, next) => {
     res.status(error.status || 500);
     res.json({
