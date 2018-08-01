@@ -28,7 +28,7 @@ exports.user_get = (req, res, next) => {
         });
 };
 exports.user_getById = (req, res, next) => {
-    const id = req.param.id;
+    let id = req.params.idUser;
     User.findById(id)
         .exec()
         .then(doc => {
